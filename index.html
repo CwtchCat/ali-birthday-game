@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ali's Birthday Full Send and Stoked</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%),
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60vh;
+      background: 
+        linear-gradient(to bottom, transparent, rgba(0,0,0,0.2)),
+        polygon(0% 100%, 0% 60%, 10% 50%, 20% 55%, 30% 45%, 40% 50%, 50% 40%, 60% 45%, 70% 35%, 80% 40%, 90% 30%, 100% 35%, 100% 100%);
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      background-position: bottom;
+      clip-path: polygon(0% 100%, 0% 60%, 10% 50%, 20% 55%, 30% 45%, 40% 50%, 50% 40%, 60% 45%, 70% 35%, 80% 40%, 90% 30%, 100% 35%, 100% 100%);
+      background-color: rgba(15, 30, 60, 0.6);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mountains {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mountain-back {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(20, 40, 80, 0.4));
+      clip-path: polygon(0% 100%, 0% 70%, 15% 55%, 25% 60%, 35% 50%, 45% 55%, 55% 45%, 65% 50%, 75% 40%, 85% 45%, 95% 35%, 100% 40%, 100% 100%);
+    }
+    .mountain-front {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80%;
+      background: linear-gradient(to bottom, transparent, rgba(10, 25, 50, 0.6));
+      clip-path: polygon(0% 100%, 0% 80%, 12% 65%, 25% 70%, 38% 60%, 50% 55%, 62% 60%, 75% 50%, 88% 55%, 100% 45%, 100% 100%);
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 100px rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    h1 { 
+      color: #1e3c72; 
+      font-size: 2.5em; 
+      text-align: center; 
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      font-weight: 800;
+    }
+    h2 { 
+      color: #2a5298; 
+      font-size: 1.8em; 
+      text-align: center; 
+      margin-bottom: 30px;
+      font-weight: 600;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    .round-info { 
+      text-align: center; 
+      color: #1e3c72; 
+      font-size: 1.2em; 
+      margin-bottom: 20px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .question { 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      padding: 20px; 
+      border-radius: 15px; 
+      margin-bottom: 30px;
+      font-size: 1.1em;
+      line-height: 1.6;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+    .player-section {
+      margin-bottom: 30px;
+      padding: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #f0f4f8 100%);
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border: 1px solid rgba(30,60,114,0.1);
+    }
+    .player-name {
+      font-weight: bold;
+      color: #1e3c72;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+      resize: vertical;
+      min-height: 80px;
+      margin-bottom: 10px;
+    }
+    .score-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    button:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    .btn-yes { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; flex: 1; }
+    .btn-close { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; flex: 1; }
+    .btn-no { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; flex: 1; }
+    .btn-funny { background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); color: #333; padding: 15px 20px; }
+    .btn-primary { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; width: 100%; }
+    .btn-secondary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; width: 100%; }
+    .scoreboard {
+      margin-top: 20px;
+    }
+    .score-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      font-size: 1.1em;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .score-item.gold { 
+      background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); 
+      font-size: 1.3em;
+      box-shadow: 0 4px 8px rgba(255,215,0,0.4);
+    }
+    .score-item.silver { 
+      background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+      box-shadow: 0 4px 8px rgba(192,192,192,0.4);
+    }
+    .score-item.bronze { 
+      background: linear-gradient(135deg, #cd7f32 0%, #b87333 100%); 
+      color: white;
+      box-shadow: 0 4px 8px rgba(205,127,50,0.4);
+    }
+    .score-item.other { 
+      background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%); 
+    }
+    .scored { color: #2ecc71; font-weight: bold; margin-top: 10px; }
+    input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      font-size: 1em;
+      margin-bottom: 15px;
+    }
+    .player-list {
+      margin: 20px 0;
+    }
+    .player-item {
+      background: #f0f0f0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="mountains">
+    <div class="mountain-back"></div>
+    <div class="mountain-front"></div>
+  </div>
+  <div class="container">
+    <div id="setup-screen">
+      <h1>🎿 Ali's Birthday</h1>
+      <h2>Full Send and Stoked</h2>
+      <div style="margin-top: 30px;">
+        <button class="btn-primary" onclick="setupPlayers()">Start Setup</button>
+      </div>
+    </div>
+
+    <div id="player-names-screen" class="hidden">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="player-name" placeholder="Your Name" style="margin-bottom: 20px;">
+      <button class="btn-primary" onclick="startGame()">Start Game</button>
+    </div>
+
+    <div id="game-screen" class="hidden">
+      <div class="round-info">Round <span id="current-round">1</span> of 12</div>
+      <div class="question" id="question-text"></div>
+      <div id="players-container"></div>
+      <button class="btn-primary" onclick="showScoreboard()" id="next-btn">Your Score</button>
+    </div>
+
+    <div id="scoreboard-screen" class="hidden">
+      <h2>Scoreboard</h2>
+      <div class="scoreboard" id="scoreboard"></div>
+      <button class="btn-primary" onclick="nextRound()" id="continue-btn">Next Round</button>
+    </div>
+
+    <div id="tiebreaker-screen" class="hidden">
+      <h2>🏆 Tiebreaker Round 🏆</h2>
+      <div class="question" id="tiebreaker-question"></div>
+      <div id="tiebreaker-container"></div>
+      <button class="btn-primary" onclick="finishGame()">Show Final Results</button>
+    </div>
+
+    <div id="final-screen" class="hidden">
+      <h1>🎉 Final Results 🎉</h1>
+      <div class="scoreboard" id="final-scoreboard"></div>
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      "If Ali could have one animal follow her around for a week, what would it be and why?",
+      "What are three types of happy skiing? (Bluebird powder, Backcountry adventure, Downhill tricks)",
+      "Where would Ali most love to take her bike for a long, peaceful ride?",
+      "If Ali were sitting by the ocean right now, what would she be doing?",
+      "What is Ali most likely knitting while watching or listening to something cozy?",
+      "What bread or dough creation makes Ali feel the most proud when it turns out just right?",
+      "What is the official catchphrase of 'ALI 27'?",
+      "What kind of scene does Ali most love to paint with watercolors?",
+      "Surfed it. Climbed it. Biked it. Hiked it. What's Ali's next Adventure Badge?",
+      "What does Ali like most about The Alchemist?",
+      "If Ali could leave tomorrow for one place—no planning stress—where would she go?",
+      "What small, ordinary thing brings Ali joy that other people might overlook?"
+    ];
+
+    const TIEBREAKER = "How many books do you think Ali would ideally like to read in a perfect year?";
+
+    let players = [];
+    let currentRound = 1;
+    let answers = {};
+
+    function setupPlayers() {
+      document.getElementById('setup-screen').classList.add('hidden');
+      document.getElementById('player-names-screen').classList.remove('hidden');
+    }
+
+    function startGame() {
+      const name = document.getElementById('player-name').value.trim();
+      
+      if (!name) {
+        alert('Please enter your name');
+        return;
+      }
+      
+      players = [{ name, score: 0 }];
+      
+      document.getElementById('player-names-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+      loadRound();
+    }
+
+    function loadRound() {
+      document.getElementById('current-round').textContent = currentRound;
+      document.getElementById('question-text').textContent = QUESTIONS[currentRound - 1];
+      
+      const container = document.getElementById('players-container');
+      container.innerHTML = '';
+      answers = {};
+      
+      players.forEach((player, idx) => {
+        container.innerHTML += `
+          <div class="player-section">
+            <div class="player-name">${player.name}</div>
+            <textarea id="answer-${idx}" placeholder="Type answer here..."></textarea>
+            <div class="score-buttons">
+              <button class="btn-yes" onclick="scoreAnswer(${idx}, 100)">YES (100)</button>
+              <button class="btn-close" onclick="scoreAnswer(${idx}, 50)">CLOSE (50)</button>
+              <button class="btn-no" onclick="scoreAnswer(${idx}, 0)">NO (0)</button>
+              <button class="btn-funny" onclick="addFunny(${idx})">😂 +25</button>
+            </div>
+            <div id="scored-${idx}"></div>
+          </div>
+        `;
+      });
+    }
+
+    function scoreAnswer(idx, points) {
+      const answer = document.getElementById(`answer-${idx}`).value;
+      if (!answer.trim()) {
+        alert('Please enter an answer first');
+        return;
+      }
+      
+      answers[idx] = { points, funny: answers[idx]?.funny || false };
+      players[idx].score += points;
+      
+      document.getElementById(`scored-${idx}`).innerHTML = 
+        `<div class="scored">Scored: ${points} points</div>`;
+      
+      checkAllScored();
+    }
+
+    function addFunny(idx) {
+      if (!answers[idx]) {
+        alert('Please score the answer first');
+        return;
+      }
+      if (answers[idx].funny) {
+        alert('Funny bonus already added');
+        return;
+      }
+      
+      answers[idx].funny = true;
+      players[idx].score += 25;
+      document.getElementById(`scored-${idx}`).innerHTML += 
+        `<div class="scored">+25 Funniest!</div>`;
+    }
+
+    function checkAllScored() {
+      if (Object.keys(answers).length === players.length) {
+        document.getElementById('next-btn').style.display = 'block';
+      }
+    }
+
+    function showScoreboard() {
+      const sorted = [...players].sort((a, b) => b.score - a.score);
+      const scoreboard = document.getElementById('scoreboard');
+      scoreboard.innerHTML = '';
+      
+      sorted.forEach((player, idx) => {
+        const className = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : 'other';
+        scoreboard.innerHTML += `
+          <div class="score-item ${className}">
+            <span>${player.name}</span>
+            <span>${player.score}</span>
+          </div>
+        `;
+      });
+      
+      document.getElementById('game-screen').classList.add('hidden');
+      document.getElementById('scoreboard-screen').classList.remove('hidden');
+    }
+
+    function nextRound() {
+      currentRound++;
+      
+      if (currentRound <= 12) {
+        document.getElementById('scoreboard-screen').classList.add('hidden');
+        document.getElementById('game-screen').classList.remove('hidden');
+        document.getElementById('next-btn').style.display = 'none';
+        loadRound();
+      } else {
+        loadTiebreaker();
+      }
+    }
+
+    function loadTiebreaker() {
+      document.getElementById('scoreboard-screen').classList.add('hidden');
+      document.getElementById('tiebreaker-screen').classList.remove('hidden');
+      document.getElementById('tiebreaker-question').textContent = TIEBREAKER;
+      
+      const container = document.getElementById('tiebreaker-container');
+      container.innerHTML = '';
+      
+      players.forEach((player, idx) => {
+        container.innerHTML += `
+          <div class="player-section">
+            <div class="player-name">${player.name}</div>
+            <input type="text" id="tie-${idx}" placeholder="Answer...">
+            <button class="btn-primary" onclick="selectWinner(${idx})">Select Winner (+200)</button>
+          </div>
+        `;
+      });
+    }
+
+    function selectWinner(idx) {
+      players[idx].score += 200;
+      finishGame();
+    }
+
+    function finishGame() {
+      const sorted = [...players].sort((a, b) => b.score - a.score);
+      const scoreboard = document.getElementById('final-scoreboard');
+      scoreboard.innerHTML = '';
+      
+      sorted.forEach((player, idx) => {
+        const className = idx === 0 ? 'gold' : idx === 1 ? 'silver' : idx === 2 ? 'bronze' : 'other';
+        const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '';
+        scoreboard.innerHTML += `
+          <div class="score-item ${className}">
+            <span>${medal} ${player.name}</span>
+            <span>${player.score}</span>
+          </div>
+        `;
+      });
+      
+      document.getElementById('tiebreaker-screen').classList.add('hidden');
+      document.getElementById('final-screen').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
